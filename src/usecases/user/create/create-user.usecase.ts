@@ -17,12 +17,11 @@ export type CreateUserOutput = {
 export class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOutput> {
 
     private constructor(private readonly gateway: UserGateway) {
-        console.log(gateway)
+        console.log(this.gateway)
     }
 
     public async execute(input: CreateUserInput): Promise<CreateUserOutput> {
         const user = User.create(input.name, input.email, input.password)
-        console.log(user)
         await this.gateway.save(user)
 
         const output = this.presentOutput(user)
