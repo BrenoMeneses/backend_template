@@ -13,12 +13,10 @@ export type GetAllUsersOutput = {
     }[]
 }
 
-export class GetAllUsersUseCase implements UseCase<GetAllUsersInput, GetAllUsersOutput>{
-    private constructor(private readonly gatway: UserGateway){
-        console.log(this.gatway)
-    }
+export class GetAllUsersUseCase implements UseCase<GetAllUsersInput, GetAllUsersOutput> {
+    private constructor(private readonly gatway: UserGateway) { }
 
-    public static create(gateway: UserGateway){
+    public static create(gateway: UserGateway) {
         return new GetAllUsersUseCase(gateway)
     }
 
@@ -30,9 +28,9 @@ export class GetAllUsersUseCase implements UseCase<GetAllUsersInput, GetAllUsers
         return output
     }
 
-    private presentOutput(users: User[]){
+    private presentOutput(users: User[]) {
         return {
-            users: users.map((u)=>{
+            users: users.map((u) => {
                 return {
                     id: u.id,
                     name: u.name,

@@ -7,7 +7,6 @@ export type UserProps = {
 
 export class User {
     private constructor(private props: UserProps) {
-        console.log(this.props)
         this.validate()
     }
 

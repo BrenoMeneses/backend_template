@@ -16,11 +16,9 @@ export type CreateUserOutput = {
 
 export class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOutput> {
 
-    private constructor(private readonly gateway: UserGateway) {
-        console.log(this.gateway)
-    }
+    private constructor(private readonly gateway: UserGateway) { }
 
-    public static create(gateway: UserGateway){
+    public static create(gateway: UserGateway) {
         return new CreateUserUseCase(gateway)
     }
 
@@ -33,7 +31,7 @@ export class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOut
         return output
     }
 
-    private presentOutput(user: User){
+    private presentOutput(user: User) {
         const output = {
             id: user.id,
             name: user.name,

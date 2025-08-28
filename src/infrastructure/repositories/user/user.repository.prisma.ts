@@ -16,7 +16,7 @@ export class UserRepositoryPrisma implements UserGateway {
             email: user.email,
             password: user.password
         }
-        console.log("asdasdas")
+
         await this.prismaClient.user.create({ data })
 
     }
