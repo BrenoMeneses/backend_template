@@ -20,6 +20,10 @@ export class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOut
         console.log(this.gateway)
     }
 
+    public static create(gateway: UserGateway){
+        return new CreateUserUseCase(gateway)
+    }
+
     public async execute(input: CreateUserInput): Promise<CreateUserOutput> {
         const user = User.create(input.name, input.email, input.password)
         await this.gateway.save(user)
