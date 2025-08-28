@@ -13,9 +13,13 @@ export type GetAllUsersOutput = {
     }[]
 }
 
-export class GetAllUsers implements UseCase<GetAllUsersInput, GetAllUsersOutput>{
+export class GetAllUsersUseCase implements UseCase<GetAllUsersInput, GetAllUsersOutput>{
     private constructor(private readonly gatway: UserGateway){
         console.log(this.gatway)
+    }
+
+    public static create(gateway: UserGateway){
+        return new GetAllUsersUseCase(gateway)
     }
 
     public async execute(): Promise<GetAllUsersOutput> {
