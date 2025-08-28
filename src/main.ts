@@ -1,25 +1,28 @@
 import { UserRepositoryPrisma } from "./infrastructure/repositories/user/user.repository.prisma.js"
+import { prisma } from "./connection/connection.prisma.js"
 import { CreateUserUseCase } from "./usecases/user/create/create-user.usecase.js"
-import { PrismaClient } from "@prisma/client"
 import { GetAllUsersUseCase } from "./usecases/user/get-all-users/get-all-users.usecase.js"
+import { CreateUserRoute } from "./infrastructure/api/express/routes/user/create-user.route.express.js"
+import { GetAllUserRoute } from "./infrastructure/api/express/routes/user/get-all-user.route.express.js"
+import { ApiExpress } from "./infrastructure/api/express/api.express.js"
+
 
 function main() {
 
-    const user = {
-        name: "MIGUEL",
-        email: "MIGUEL@GMAIL",
-        password: "123456"
-    }
+    const port = 3333
 
-    const prisma = new PrismaClient()
-    const aRepository = UserRepositoryPrisma.create(prisma)
+    const repository = UserRepositoryPrisma.create(prisma)
+    
+    const createUser = CreateUserUseCase.create(repository)
+    const getAllUser = GetAllUsersUseCase.create(repository)
 
-    //const createUserUseCase = CreateUserUseCase.create(aRepository)
-    //createUserUseCase.execute(user)
+    const createRoute = CreateUserRoute.create(createUser)
+    const getAllRoute = GetAllUserRoute.create(getAllUser)
 
-    const getAll = GetAllUsersUseCase.create(aRepository)
+    const api = ApiExpress.create([createRoute, getAllRoute])
 
-    console.log(getAll.execute().then((a)=>{console.log(a)}))
+    api.start(port)
+
 }
 
 main()
