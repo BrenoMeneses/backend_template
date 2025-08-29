@@ -12,6 +12,7 @@ export type CreateUserOutput = {
     id: string;
     name: string;
     email: string;
+    password: string;
 }
 
 export class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOutput> {
@@ -35,7 +36,8 @@ export class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOut
         const output = {
             id: user.id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            password: user.password
         }
         return output
     }

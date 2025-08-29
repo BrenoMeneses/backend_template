@@ -16,13 +16,14 @@ export class CreateUserRoute implements Route {
             try {
                 const { name, email, password } = request.body
 
-                const output = await this.CreateUser.execute({ name, email, password }).catch(() => { return { error: "ocorreu algum erro" } })
+                const output = await this.CreateUser.execute({ name, email, password })
 
                 response.status(200).json(output).send()
             } catch (error: any) {
+                console.log(error)
                 response.status(400).json({ message: error.message || "ocorreu algum erro" })
             }
-            
+
         }
 
     }

@@ -36,4 +36,21 @@ export class UserRepositoryPrisma implements UserGateway {
         return output
     } 
 
+    public async GetById(id: string): Promise<User> {
+        const IdUser = await this.prismaClient.user.findUnique({where: {id: id}})
+
+        if(!IdUser){
+            throw new Error("usuario não encontrado")
+        }
+
+        const output = User.with({
+            id: IdUser.id,
+            name: IdUser.name,
+            email: IdUser.email,
+            password: IdUser.password
+        })
+ 
+        return output
+    }
+
 }

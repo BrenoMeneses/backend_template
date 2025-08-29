@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { GetAllUsersUseCase } from "../../../../../usecases/user/get-all-users/get-all-users.usecase.js";
+import type { GetAllUsersUseCase } from "../../../../../usecases/user/get-all/get-all-users.usecase.js";
 import { httpMethod, type Route } from "../route.js";
 
 export class GetAllUserRoute implements Route {
