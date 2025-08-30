@@ -20,7 +20,7 @@ function main() {
     const createUser = CreateUserUseCase.create(repository)
     const getAllUser = GetAllUsersUseCase.create(repository)
     const getById = GetUserByIdUseCase.create(repository)
-    const getByEmail = new GetUserByEmailUseCase(repository)
+    const getByEmail = GetUserByEmailUseCase.create(repository)
 
     const createRoute = CreateUserRoute.create(createUser)
     const getAllRoute = GetAllUserRoute.create(getAllUser)

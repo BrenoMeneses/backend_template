@@ -20,7 +20,9 @@ export class GetUserByEmailUseCase implements UseCase<GetUserByEmailInput, GetUs
 
     constructor(private readonly gateway: UserGateway) { }
 
-
+    public static create(gateway: UserGateway){
+        return new GetUserByEmailUseCase(gateway)
+    }
 
     public async execute(input: GetUserByEmailInput): Promise<GetUserByEmailOutput> {
         const user = await this.gateway.GetByEmail(input.email)
