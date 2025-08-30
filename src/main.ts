@@ -3,10 +3,12 @@ import { prisma } from "./connection/connection.prisma.js"
 import { CreateUserUseCase } from "./usecases/user/create/create-user.usecase.js"
 import { GetAllUsersUseCase } from "./usecases/user/get-all/get-all-users.usecase.js"
 import { GetUserByIdUseCase } from "./usecases/user/get-by-id/get-user-by-id.usecase.js"
+import { GetUserByEmailUseCase } from "./usecases/user/get-by-email/get-user-by-email.usecase.js"
 import { CreateUserRoute } from "./infrastructure/api/express/routes/user/create-user.route.express.js"
 import { GetAllUserRoute } from "./infrastructure/api/express/routes/user/get-all-user.route.express.js"
 import { GetUserByIdRoute } from "./infrastructure/api/express/routes/user/get-user-by-id.route.express.js"
 import { ApiExpress } from "./infrastructure/api/express/api.express.js"
+import { GetUserByEmailRoute } from "./infrastructure/api/express/routes/user/get-user-by-email.express.route.js"
 
 
 function main() {
@@ -18,12 +20,14 @@ function main() {
     const createUser = CreateUserUseCase.create(repository)
     const getAllUser = GetAllUsersUseCase.create(repository)
     const getById = GetUserByIdUseCase.create(repository)
+    const getByEmail = new GetUserByEmailUseCase(repository)
 
     const createRoute = CreateUserRoute.create(createUser)
     const getAllRoute = GetAllUserRoute.create(getAllUser)
     const getByIdRoute = GetUserByIdRoute.create(getById)
+    const getByEmailRoute = GetUserByEmailRoute.create(getByEmail)
 
-    const api = ApiExpress.create([createRoute, getAllRoute, getByIdRoute])
+    const api = ApiExpress.create([createRoute, getAllRoute, getByIdRoute, getByEmailRoute])
 
     api.start(port)
 

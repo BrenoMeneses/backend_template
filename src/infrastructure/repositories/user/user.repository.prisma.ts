@@ -24,7 +24,7 @@ export class UserRepositoryPrisma implements UserGateway {
     public async GetAll(): Promise<User[]> {
         const AllUsers = await this.prismaClient.user.findMany()
 
-        const output = AllUsers.map((u)=>{
+        const output = AllUsers.map((u) => {
             return User.with({
                 id: u.id,
                 name: u.name,
@@ -34,22 +34,39 @@ export class UserRepositoryPrisma implements UserGateway {
         })
 
         return output
-    } 
+    }
 
     public async GetById(id: string): Promise<User> {
-        const IdUser = await this.prismaClient.user.findUnique({where: {id: id}})
+        const userId = await this.prismaClient.user.findUnique({ where: { id: id } })
 
-        if(!IdUser){
+        if (!userId) {
             throw new Error("usuario não encontrado")
         }
 
         const output = User.with({
-            id: IdUser.id,
-            name: IdUser.name,
-            email: IdUser.email,
-            password: IdUser.password
+            id: userId.id,
+            name: userId.name,
+            email: userId.email,
+            password: userId.password
         })
- 
+
+        return output
+    }
+
+    public async GetByEmail(email: string): Promise<User> {
+        const userEmail = await this.prismaClient.user.findUnique({ where: { email: email } })
+
+        if (!userEmail) {
+            throw new Error("usuario não encontrado")
+        }
+
+        const output = User.with({
+            id: userEmail.id,
+            name: userEmail.name,
+            email: userEmail.email,
+            password: userEmail.password
+        })
+
         return output
     }
 

@@ -14,9 +14,9 @@ export class GetAllUserRoute implements Route {
         return async (request: Request, response: Response) => {
             
             try {
-                const output = await this.GetAll.execute().then((u) => { return u })
+                const output = await this.GetAll.execute()
 
-                response.status(200).json(output).send()
+                response.status(200).json(output)
             } catch (error: any) {
                 response.status(400).json({ message: error.message || "ocorreu algum erro" })
             }

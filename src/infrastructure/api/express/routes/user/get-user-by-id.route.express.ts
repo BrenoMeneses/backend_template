@@ -7,22 +7,20 @@ export class GetUserByIdRoute implements Route {
     private constructor(private readonly path: string, private readonly method: httpMethod, private readonly GetById: GetUserByIdUseCase) { }
 
     public static create(GetById: GetUserByIdUseCase) {
-        return new GetUserByIdRoute("/user/:id", httpMethod.GET, GetById)
+        return new GetUserByIdRoute("/user/id/:id", httpMethod.GET, GetById)
     }
 
     public getHandler() {
         return async (request: Request, response: Response) => {
-
+            
             try {
                 const { id } = request.params
 
-                if (!id) {
-                    throw new Error("id invalido")
-                }
+                if (!id) { throw new Error("id invalido") }
 
                 const output = await this.GetById.execute({ id })
 
-                response.status(200).json(output).send()
+                response.status(200).json(output)
 
             } catch (error: any) {
                 response.status(400).json({ message: error.message || "ocorreu algum erro" })

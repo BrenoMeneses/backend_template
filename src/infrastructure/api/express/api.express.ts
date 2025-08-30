@@ -26,7 +26,7 @@ export class ApiExpress {
 
     public start(port: number) {
         this.app.listen(port, () => {
-            console.log("rodando na porta " + port)
+            console.log("rodando em http://localhost:" + port)
         })
     }
 

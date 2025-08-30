@@ -18,7 +18,7 @@ export class CreateUserRoute implements Route {
 
                 const output = await this.CreateUser.execute({ name, email, password })
 
-                response.status(200).json(output).send()
+                response.status(200).json(output)
             } catch (error: any) {
                 console.log(error)
                 response.status(400).json({ message: error.message || "ocorreu algum erro" })
