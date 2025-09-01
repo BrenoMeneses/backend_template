@@ -27,7 +27,6 @@ export class CreateUserUseCase implements UseCase<CreateUserInput, CreateUserOut
     public async execute(input: CreateUserInput): Promise<CreateUserOutput> {
 
         const passwordHash = await this.encryption.hash(input.password)
-        console.log(passwordHash)
 
         const user = User.create(input.name, input.email, passwordHash)
         await this.gateway.save(user)

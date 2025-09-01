@@ -15,9 +15,9 @@ import { BcryptAdapter } from "./infrastructure/security/bcrypt/bcrypt.js"
 
 (function main() {
 
-    const port = 3333
+    const port = Number(process.env.PORT) || 3333
 
-    const bcryptjs = new BcryptAdapter()
+    const bcryptjs = BcryptAdapter.create(8)
 
     const repository = UserRepositoryPrisma.create(prisma)
     
