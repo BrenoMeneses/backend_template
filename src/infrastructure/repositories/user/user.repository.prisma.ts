@@ -40,7 +40,7 @@ export class UserRepositoryPrisma implements UserGateway {
         const userId = await this.prismaClient.user.findUnique({ where: { id: id } })
 
         if (!userId) {
-            throw new Error("usuario não encontrado")
+            throw new Error("id inválido")
         }
 
         const output = User.with({
@@ -68,6 +68,12 @@ export class UserRepositoryPrisma implements UserGateway {
         })
 
         return output
+    }
+
+    public async delete(id: string): Promise<void>{
+        await this.GetById(id)
+
+        const deleteUser = await this.prismaClient.user.delete({where: {id: id}})
     }
 
 }

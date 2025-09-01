@@ -4,7 +4,8 @@ export type httpMethod = "get" | "post"
 
 export const httpMethod = {
     GET: "get" as httpMethod,
-    POST: "post" as httpMethod
+    POST: "post" as httpMethod,
+    DELETE: "delete" as httpMethod
 } as const
 
 export interface Route {
