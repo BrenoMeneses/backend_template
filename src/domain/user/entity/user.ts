@@ -26,10 +26,10 @@ export class User {
 
     private validate(){
         if(this.props.password.length < 6){
-            throw new Error("Password must be at least 6 characters long");
+            throw new Error("A senha precisa ter no mínimo 6 caracteres");
         }
         if(!this.props.email.includes("@")){
-            throw new Error("Email must be valid");
+            throw new Error("E-mail inválido");
         }
     }
 

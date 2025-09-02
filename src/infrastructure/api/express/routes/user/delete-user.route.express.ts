@@ -22,7 +22,6 @@ export class DeleteUserRoute implements Route {
 
                 response.status(200).json(output)
             } catch (error: any) {
-                console.log(error)
                 response.status(400).json({ message: error.message || "ocorreu algum erro" })
             }
 
